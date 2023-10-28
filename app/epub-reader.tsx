@@ -4,7 +4,7 @@ import React from 'react';
 const EpubReader = (params:any) => {
     const iframeStyle = {
         width: '100%',
-        height: '100vh', // 100% of the viewport height
+        height: '80%', // 100% of the viewport height
       };
 
       const IFRAME_URL=process.env.NEXT_PUBLIC_IFRAME_URL
