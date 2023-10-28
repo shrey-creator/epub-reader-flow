@@ -14,8 +14,6 @@ const EpubReader = (params:any) => {
   return (
     <iframe
       src={`${IFRAME_URL_WITH_QUERY}`}
-      width="100%"
-      height="500px"
       title="EPUB Reader"
       style={iframeStyle}
 
