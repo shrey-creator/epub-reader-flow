@@ -6,7 +6,10 @@ interface SongDetailView {
   sungBy: string;
   date: string;
   ringToneUrl: string;
+  songUrl: string;
   id: number;
+  setPlayingSong: (song: any) => void;
+  isPlaying: boolean;
 }
 
 const SongDetail: React.FC<SongDetailView> = ({
@@ -14,15 +17,16 @@ const SongDetail: React.FC<SongDetailView> = ({
   sungBy,
   date,
   ringToneUrl,
+  songUrl,
   id,
+  setPlayingSong,
+  isPlaying,
 }) => {
-  console.log(id);
-
   return (
     <div className="song-row" key={id}>
       <button
         className="play-button-small"
-        onClick={() => handlePlayClick(songUrl)}
+        onClick={() => setPlayingSong(songUrl)}
       >
         {" "}
         {isPlaying ? "▐▐ " : "▶"}

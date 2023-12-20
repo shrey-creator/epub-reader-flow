@@ -98,11 +98,12 @@ const MusicPage = () => {
           <SongDetail
             songName={song.name}
             sungBy={song.singer}
-            ringToneUrl={song.isRingtoneAvailable}
+            ringToneUrl={"test.mp3"}
             id={index}
             songUrl={"test.mp3"}
-            handlePlayClick={handlePlayClick}
+            setPlayingSong={handlePlayClick}
             isPlaying={playing}
+            date={""}
           />
         ))}
       </div>
