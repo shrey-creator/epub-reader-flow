@@ -30,3 +30,116 @@ html, body{
   width: 100%;
   height: 100%;
 }
+
+
+/* RoundedButton.module.css */
+
+/* MusicPage.module.css */
+
+/* General styles */
+.music-page {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+/* Top Component */
+.top-component {
+  margin-bottom: 20px;
+}
+
+.top-left {
+  display: flex;
+  align-items: center;
+}
+
+.song-cover {
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+  margin-right: 20px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.play-button {
+  margin-top: 10px;
+  padding: 6px 30px;
+  font-size: 18px;
+  border: none;
+  border-radius: 50px;
+  background-color: #3498db;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.play-button:hover {
+  background-color: #2980b9;
+}
+
+/* Song List */
+.song-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+}
+
+
+
+.song-details {
+  flex-grow: 1;
+}
+
+.song-name {
+  font-weight: bold;
+}
+
+.singer {
+  color: #777;
+}
+
+.ringtone-icon {
+  margin-right: 10px;
+}
+
+.options-button {
+  padding: 5px;
+  font-size: 20px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #777;
+  transition: color 0.3s ease;
+}
+
+.options-button:hover {
+  color: #333;
+}
+
+.song-cover {
+  max-width: 100px; /* Set maximum width for the image */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 5px;
+}
+
+
+.play-button-small {
+  padding: 4px 8px; /* Adjust padding */
+  font-size: 12px; /* Adjust font size */
+  border: none;
+  border-radius: 20px; /* Make it more round */
+  background-color: #3498db;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 10px; /* Leave some gap between title and play button */
+}
+
+
+
