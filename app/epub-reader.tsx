@@ -10,18 +10,21 @@ const MusicPage = () => {
       name: "Song 1",
       singer: "Singer 1",
       isRingtoneAvailable: true,
+      songUrl: "test.mp3",
     },
     {
       id: 2,
       name: "Song 2",
       singer: "Singer 2",
       isRingtoneAvailable: false,
+      songUrl: "test1.mp3",
     },
     {
       id: 3,
       name: "Song 1",
       singer: "Singer 1",
       isRingtoneAvailable: true,
+      songUrl: "test2.mp3",
     },
     {
       id: 4,
@@ -57,6 +60,7 @@ const MusicPage = () => {
   ];
   const [currentSongUrl, setCurrentSongUrl] = useState("");
   const [playing, setPlaying] = useState(false); // State to control play/pause
+  const [currentlyPlayingSong, setCurrentlyPlayingSong] = useState(null);
 
   const handlePlayClick = (songUrl: string) => {
     // Logic to play the song using the provided URL
@@ -74,6 +78,7 @@ const MusicPage = () => {
     // Implement your audio player or playback logic here
     // For instance:
   };
+  const [audioPlayer, setAudioPlayer] = useState(new Audio());
 
   return (
     <div className={styles["music-page"]}>
@@ -99,10 +104,8 @@ const MusicPage = () => {
             songName={song.name}
             sungBy={song.singer}
             ringToneUrl={"test.mp3"}
-            id={index}
-            songUrl={"test.mp3"}
-            setPlayingSong={handlePlayClick}
-            isPlaying={playing}
+            key={index}
+            songUrl={song?.songUrl}
             date={""}
           />
         ))}
