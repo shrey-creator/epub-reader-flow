@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { BiBell } from "react-icons/bi";
 import SideMenu from "./SideMenu";
+import { AudioPlayerContext } from "./audio-player-context";
 
 interface SongDetailView {
   songName: string;
@@ -8,6 +9,8 @@ interface SongDetailView {
   date: string;
   ringToneUrl: string;
   songUrl: string | undefined;
+  handlePlayClick: any;
+  currentPlayingSongUrl: string;
 }
 
 const SongDetail: React.FC<SongDetailView> = ({
@@ -16,26 +19,22 @@ const SongDetail: React.FC<SongDetailView> = ({
   date,
   ringToneUrl,
   songUrl,
+  handlePlayClick,
+  currentPlayingSongUrl,
 }) => {
-  const [isPlaying, setPlaying] = useState(false); // State to control play/pause
-  const [audioPlayer, setAudioPlayer] = useState(new Audio(songUrl));
+  // const [isPlaying, setPlaying] = useState(false); // State to control play/pause
 
   return (
     <div className="song-row">
       <button
         className="play-button-small"
         onClick={() => {
-          if (audioPlayer && isPlaying) {
-            audioPlayer.pause();
-          } else if (audioPlayer && !isPlaying) {
-            audioPlayer.play();
-          }
-
-          if (isPlaying) setPlaying(false);
-          else setPlaying(true);
+          if (songUrl === currentPlayingSongUrl) {
+            handlePlayClick("");
+          } else handlePlayClick(songUrl);
         }}
       >
-        {isPlaying ? "▐▐ " : "▶"}
+        {songUrl === currentPlayingSongUrl ? "▐▐ " : "▶"}
       </button>
       <div className="song-details">
         <div className="song-name">{songName}</div>

@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { BiBell } from "react-icons/bi"; // Import the BiBell icon
 import styles from "./MusicPage.module.css"; // Import CSS module
 import SongDetail from "./song-item";
+import { AudioPlayerContext } from "./audio-player-context";
 
 const MusicPage = () => {
   const songs = [
@@ -58,27 +59,40 @@ const MusicPage = () => {
     },
     // Add more songs as needed
   ];
-  const [currentSongUrl, setCurrentSongUrl] = useState("");
-  const [playing, setPlaying] = useState(false); // State to control play/pause
-  const [currentlyPlayingSong, setCurrentlyPlayingSong] = useState(null);
+
+  const audioPlayer = useContext(AudioPlayerContext);
+  const [currentPlayingUrl, setCurrentPlayingUrl] = useState("");
+  // const handleSongEnded = () => {
+  //   // Check if there are more songs in the list
+  //   if (currentSongIndex < songs.length - 1) {
+  //     setCurrentSongIndex(currentSongIndex + 1); // Update current song index
+  //   } else {
+  //     // If it's the last song, loop back to the beginning or stop playback
+  //     setCurrentSongIndex(0); // Loop back to the first song
+  //     // You can add logic here to stop playback or perform other actions
+  //   }
+  // };
+
+  // audioPlayer.addEventListener('ended', handleSongEnded);
+
+  useEffect(() => {
+    if (currentPlayingUrl) {
+      audioPlayer.src = currentPlayingUrl as string;
+      audioPlayer.play();
+    } else {
+      audioPlayer.pause();
+    }
+  }, [currentPlayingUrl]);
 
   const handlePlayClick = (songUrl: string) => {
     // Logic to play the song using the provided URL
-    const audioPlayer = new Audio(songUrl);
 
-    if (playing) {
-      setPlaying(false);
-      audioPlayer.pause();
+    if (songUrl) {
+      setCurrentPlayingUrl(songUrl);
     } else {
-      setCurrentSongUrl(songUrl);
-      setPlaying(true);
-      audioPlayer.play();
+      setCurrentPlayingUrl("");
     }
-
-    // Implement your audio player or playback logic here
-    // For instance:
   };
-  const [audioPlayer, setAudioPlayer] = useState(new Audio());
 
   return (
     <div className={styles["music-page"]}>
@@ -99,16 +113,22 @@ const MusicPage = () => {
 
       {/* List of Songs */}
       <div className={styles["song-list"]}>
-        {songs.map((song, index) => (
-          <SongDetail
-            songName={song.name}
-            sungBy={song.singer}
-            ringToneUrl={"test.mp3"}
-            key={index}
-            songUrl={song?.songUrl}
-            date={""}
-          />
-        ))}
+        {songs.map((song, index) => {
+          return (
+            <div>
+              <SongDetail
+                songName={song.name}
+                sungBy={song.singer}
+                ringToneUrl={"test.mp3"}
+                key={index}
+                songUrl={song?.songUrl}
+                date={""}
+                handlePlayClick={handlePlayClick}
+                currentPlayingSongUrl={currentPlayingUrl}
+              />
+            </div>
+          );
+        })}
       </div>
     </div>
   );
