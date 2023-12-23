@@ -11,14 +11,14 @@ const MusicPage = () => {
       name: "Song 1",
       singer: "Singer 1",
       isRingtoneAvailable: true,
-      songUrl: "test.mp3",
+      songUrl: "tes.mp3",
     },
     {
       id: 2,
       name: "Song 2",
       singer: "Singer 2",
       isRingtoneAvailable: false,
-      songUrl: "test1.mp3",
+      songUrl: "bahara_part2.mp3",
     },
     {
       id: 3,
@@ -32,6 +32,7 @@ const MusicPage = () => {
       name: "Song 2",
       singer: "Singer 2",
       isRingtoneAvailable: false,
+      songUrl: "test.mp3",
     },
     {
       id: 5,
@@ -61,37 +62,42 @@ const MusicPage = () => {
   ];
 
   const audioPlayer = useContext(AudioPlayerContext);
-  const [currentPlayingUrl, setCurrentPlayingUrl] = useState("");
-  // const handleSongEnded = () => {
-  //   // Check if there are more songs in the list
-  //   if (currentSongIndex < songs.length - 1) {
-  //     setCurrentSongIndex(currentSongIndex + 1); // Update current song index
-  //   } else {
-  //     // If it's the last song, loop back to the beginning or stop playback
-  //     setCurrentSongIndex(0); // Loop back to the first song
-  //     // You can add logic here to stop playback or perform other actions
-  //   }
+  const [currentSongIndex, setCurrentSongIndex] = useState(-1);
+  const handleSongEnded = () => {
+    // Check if there are more songs in the list
+    if (currentSongIndex < songs.length - 1) {
+      setCurrentSongIndex(currentSongIndex + 1); // Update current song index
+    } else {
+      // If it's the last song, loop back to the beginning or stop playback
+      setCurrentSongIndex(0); // Loop back to the first song
+      // You can add logic here to stop playback or perform other actions
+    }
+  };
   // };
 
-  // audioPlayer.addEventListener('ended', handleSongEnded);
+  audioPlayer.addEventListener("ended", handleSongEnded);
 
   useEffect(() => {
-    if (currentPlayingUrl) {
-      audioPlayer.src = currentPlayingUrl as string;
+    console.log("audioPlayer", audioPlayer.currentSrc);
+
+    if (currentSongIndex >= 0) {
+      const currentSongUrl = songs[currentSongIndex]?.songUrl as string;
+      if (audioPlayer.currentSrc !== currentSongUrl)
+        audioPlayer.src = currentSongUrl;
       audioPlayer.play();
     } else {
       audioPlayer.pause();
     }
-  }, [currentPlayingUrl]);
+  }, [currentSongIndex]);
 
-  const handlePlayClick = (songUrl: string) => {
+  const handlePlayClick = (songIndex: number) => {
     // Logic to play the song using the provided URL
-
-    if (songUrl) {
-      setCurrentPlayingUrl(songUrl);
-    } else {
-      setCurrentPlayingUrl("");
-    }
+    setCurrentSongIndex(songIndex);
+    // if (songIndex) {
+    //   setCurrentSongIndex(songIndex);
+    // } else {
+    //   setCurrentSongIndex(-1);
+    // }
   };
 
   return (
@@ -106,7 +112,14 @@ const MusicPage = () => {
           />
           <div className="top-side-component">
             <div className={styles["title"]}>Title of the Song</div>
-            <button className={styles["play-button"]}>Play</button>
+            <button
+              className={styles["play-button"]}
+              onClick={() => {
+                setCurrentSongIndex(0);
+              }}
+            >
+              Play
+            </button>
           </div>
         </div>
       </div>
@@ -121,10 +134,10 @@ const MusicPage = () => {
                 sungBy={song.singer}
                 ringToneUrl={"test.mp3"}
                 key={index}
-                songUrl={song?.songUrl}
+                songindex={index}
                 date={""}
                 handlePlayClick={handlePlayClick}
-                currentPlayingSongUrl={currentPlayingUrl}
+                currentSongIndex={currentSongIndex}
               />
             </div>
           );

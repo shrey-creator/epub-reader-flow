@@ -8,9 +8,9 @@ interface SongDetailView {
   sungBy: string;
   date: string;
   ringToneUrl: string;
-  songUrl: string | undefined;
+  songindex: number;
   handlePlayClick: any;
-  currentPlayingSongUrl: string;
+  currentSongIndex: number;
 }
 
 const SongDetail: React.FC<SongDetailView> = ({
@@ -18,9 +18,9 @@ const SongDetail: React.FC<SongDetailView> = ({
   sungBy,
   date,
   ringToneUrl,
-  songUrl,
+  songindex,
   handlePlayClick,
-  currentPlayingSongUrl,
+  currentSongIndex,
 }) => {
   // const [isPlaying, setPlaying] = useState(false); // State to control play/pause
 
@@ -29,12 +29,12 @@ const SongDetail: React.FC<SongDetailView> = ({
       <button
         className="play-button-small"
         onClick={() => {
-          if (songUrl === currentPlayingSongUrl) {
-            handlePlayClick("");
-          } else handlePlayClick(songUrl);
+          if (songindex === currentSongIndex) {
+            handlePlayClick(-1);
+          } else handlePlayClick(songindex);
         }}
       >
-        {songUrl === currentPlayingSongUrl ? "▐▐ " : "▶"}
+        {songindex === currentSongIndex ? "▐▐ " : "▶"}
       </button>
       <div className="song-details">
         <div className="song-name">{songName}</div>
