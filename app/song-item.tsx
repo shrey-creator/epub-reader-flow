@@ -29,9 +29,7 @@ const SongDetail: React.FC<SongDetailView> = ({
       <button
         className="play-button-small"
         onClick={() => {
-          if (songindex === currentSongIndex) {
-            handlePlayClick(-1);
-          } else handlePlayClick(songindex);
+          handlePlayClick(songindex);
         }}
       >
         {songindex === currentSongIndex ? "▐▐ " : "▶"}

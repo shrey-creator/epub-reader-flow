@@ -98,13 +98,18 @@ const MusicPage = () => {
   }, [currentSongIndex]);
 
   const handlePlayClick = (songIndex: number) => {
-    // if (songIndex === currentSongIndex) {
-    //   setIsSongPlaying(false);
-    // } else {
-    //   setIsSongPlaying(true);
-    // }
+    if (songIndex === currentSongIndex) {
+      if (isSongPlaying) setIsSongPlaying(false);
+      else setIsSongPlaying(true);
+    } else {
+      setIsSongPlaying(true);
+    }
     setCurrentSongIndex(songIndex);
-    setIsSongPlaying(true);
+
+    // if (songIndex === currentSongIndex) {
+    //   setCurrentSongIndex(-1);
+    // } else setCurrentSongIndex(songIndex);
+    // setIsSongPlaying(true);
   };
 
   return (
