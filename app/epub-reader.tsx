@@ -105,63 +105,63 @@ const MusicPage = () => {
       setIsSongPlaying(true);
     }
     setCurrentSongIndex(songIndex);
-
-    // if (songIndex === currentSongIndex) {
-    //   setCurrentSongIndex(-1);
-    // } else setCurrentSongIndex(songIndex);
-    // setIsSongPlaying(true);
   };
 
   return (
-    <div className={styles["music-page"]}>
-      {/* Top Component */}
-      <div className={styles["top-component"]}>
-        <div className={styles["top-left"]}>
-          <img
-            src="https://imgs.search.brave.com/RYl7czB-pd5dsWx2F8SoIICRTBu9lUFN5ZIVusCzU_0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9zaGl2/amlwaWNzLmNvbS93/cC1jb250ZW50L3Vw/bG9hZHMvMjAyMy8w/Ni9CcmFobWEtS3Vt/YXJpcy1JbWFnZXMt/RnJlZS1Eb3dubG9h/ZC0yMS1TZXB0ZW1i/ZXItMjAyMy5qcGc"
-            alt="Song Cover"
-            className={styles["song-cover"]}
-          />
-          <div className="top-side-component">
-            <div className={styles["title"]}>Title of the Song</div>
-            <button
-              className={styles["play-button"]}
-              onClick={() => {
-                setCurrentSongIndex(0);
-              }}
-            >
-              Play
-            </button>
+    <div className={styles["music-page-container"]}>
+      <div className={styles["music-page"]}>
+        {/* Top Component */}
+        <div className={styles["top-component"]}>
+          <div className={styles["top-left"]}>
+            <img
+              src="https://imgs.search.brave.com/RYl7czB-pd5dsWx2F8SoIICRTBu9lUFN5ZIVusCzU_0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9zaGl2/amlwaWNzLmNvbS93/cC1jb250ZW50L3Vw/bG9hZHMvMjAyMy8w/Ni9CcmFobWEtS3Vt/YXJpcy1JbWFnZXMt/RnJlZS1Eb3dubG9h/ZC0yMS1TZXB0ZW1i/ZXItMjAyMy5qcGc"
+              alt="Song Cover"
+              className={styles["song-cover"]}
+            />
+            <div className="top-side-component">
+              <div className={styles["title"]}>Title of the Song</div>
+              <button
+                className={styles["play-button"]}
+                onClick={() => {
+                  setCurrentSongIndex(0);
+                  setIsSongPlaying(true);
+                }}
+              >
+                Play
+              </button>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* List of Songs */}
-      <div className={styles["song-list"]}>
-        {songs.map((song, index) => {
-          return (
-            <div>
-              <SongDetail
-                songName={song.name}
-                sungBy={song.singer}
-                ringToneUrl={"test.mp3"}
-                key={index}
-                songindex={index}
-                date={""}
-                handlePlayClick={handlePlayClick}
-                currentSongIndex={currentSongIndex}
-              />
-            </div>
-          );
-        })}
+        {/* List of Songs */}
+        <div className={styles["song-list"]}>
+          {songs.map((song, index) => {
+            return (
+              <div>
+                <SongDetail
+                  songName={song.name}
+                  sungBy={song.singer}
+                  ringToneUrl={"test.mp3"}
+                  key={index}
+                  songindex={index}
+                  date={""}
+                  handlePlayClick={handlePlayClick}
+                  currentSongIndex={currentSongIndex}
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
-      <StickyBar
-        handleSongEnded={handleSongEnded}
-        currentSongIndex={currentSongIndex}
-        songsArray={songs}
-        isSongPlaying={isSongPlaying}
-        setIsSongPlaying={setIsSongPlaying}
-      />
+      <div className={styles["sticky-bar"]}>
+        <StickyBar
+          handleSongEnded={handleSongEnded}
+          currentSongIndex={currentSongIndex}
+          songsArray={songs}
+          isSongPlaying={isSongPlaying}
+          setIsSongPlaying={setIsSongPlaying}
+        />
+      </div>
     </div>
   );
 };

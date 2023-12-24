@@ -32,7 +32,7 @@ const StickyBar: React.FC<{
   }, [isSongPlaying]);
 
   const togglePlay = () => {
-    setIsSongPlaying(!isSongPlaying);
+    if (currentSongIndex !== -1) setIsSongPlaying(!isSongPlaying);
   };
 
   // ... audio playback logic
@@ -89,31 +89,6 @@ const StickyBar: React.FC<{
 
   const [hoverTime, setHoverTime] = useState("0:00");
 
-  //   const handleHover = (event: React.MouseEvent<HTMLDivElement>) => {
-  //     if (
-  //       audioRef?.current &&
-  //       progressBarRef.current &&
-  //       currentSongIndex !== -1
-  //     ) {
-  //       const rect = progressBarRef.current.getBoundingClientRect();
-  //       const offsetX = event.clientX - rect.left;
-  //       const progressBarWidth = progressBarRef.current.clientWidth;
-  //       const hoverPercentage = (offsetX / progressBarWidth) * 100;
-  //       const hoverTimeInSeconds =
-  //         (audioRef.current.duration * hoverPercentage) / 100;
-
-  //       const hoverMinutes = Math.floor(hoverTimeInSeconds / 60);
-  //       const hoverSeconds = Math.floor(hoverTimeInSeconds % 60);
-  //       setHoverTime(
-  //         `${hoverMinutes}:${hoverSeconds.toString().padStart(2, "0")}`
-  //       );
-  //     }
-  //   };
-
-  const handleHoverLeave = () => {
-    setHoverTime("0:00");
-  };
-
   return (
     <div className={styles.stickyBar}>
       <ProgressBar
@@ -139,13 +114,13 @@ const StickyBar: React.FC<{
             </div>
           )}
         </div>
-
-        {!isSongPlaying ? (
-          <FaPlay className={styles.playIcon} onClick={togglePlay} />
-        ) : (
-          <FaPause className={styles.playIcon} onClick={togglePlay} />
-        )}
-
+        <div>
+          {!isSongPlaying ? (
+            <FaPlay className={styles.playIcon} onClick={togglePlay} />
+          ) : (
+            <FaPause className={styles.playIcon} onClick={togglePlay} />
+          )}
+        </div>
         <div>
           <audio
             ref={audioRef}
