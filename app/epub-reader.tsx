@@ -72,6 +72,7 @@ const MusicPage = () => {
 
   const audioPlayer = useContext(AudioPlayerContext)?.current;
   const [currentSongIndex, setCurrentSongIndex] = useState(-1);
+  const [isSongPlaying, setIsSongPlaying] = useState(false);
   const handleSongEnded = () => {
     // Check if there are more songs in the list
     if (currentSongIndex < songs.length - 1) {
@@ -93,19 +94,17 @@ const MusicPage = () => {
       if (audioPlayer?.currentSrc !== currentSongUrl && audioPlayer)
         audioPlayer.src = currentSongUrl;
       audioPlayer?.play();
-    } else {
-      audioPlayer?.pause();
     }
   }, [currentSongIndex]);
 
   const handlePlayClick = (songIndex: number) => {
-    // Logic to play the song using the provided URL
-    setCurrentSongIndex(songIndex);
-    // if (songIndex) {
-    //   setCurrentSongIndex(songIndex);
+    // if (songIndex === currentSongIndex) {
+    //   setIsSongPlaying(false);
     // } else {
-    //   setCurrentSongIndex(-1);
+    //   setIsSongPlaying(true);
     // }
+    setCurrentSongIndex(songIndex);
+    setIsSongPlaying(true);
   };
 
   return (
@@ -155,6 +154,8 @@ const MusicPage = () => {
         handleSongEnded={handleSongEnded}
         currentSongIndex={currentSongIndex}
         songsArray={songs}
+        isSongPlaying={isSongPlaying}
+        setIsSongPlaying={setIsSongPlaying}
       />
     </div>
   );

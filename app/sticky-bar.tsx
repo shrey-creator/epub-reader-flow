@@ -2,58 +2,88 @@ import React, { useRef, useState, useEffect, useContext } from "react";
 import styles from "./StickyBar.module.css"; // Import CSS module for styling
 import { AudioPlayerContext } from "./audio-player-context";
 import { FaPause, FaPlay } from "react-icons/fa"; // Import Play Icon from react-icons/fa
+import ProgressBar from "./ProgressBar";
 
 const StickyBar: React.FC<{
   handleSongEnded: () => void;
   currentSongIndex: number;
   songsArray: any;
-}> = ({ handleSongEnded, currentSongIndex, songsArray }) => {
+  isSongPlaying: boolean;
+  setIsSongPlaying: any;
+}> = ({
+  handleSongEnded,
+  currentSongIndex,
+  songsArray,
+  isSongPlaying,
+  setIsSongPlaying,
+}) => {
   const audioRef = useContext(AudioPlayerContext);
-  const progressBarRef = useRef<HTMLDivElement>(null);
-  const [currentTime, setCurrentTime] = useState("0:00");
-  const [duration, setDuration] = useState("0:00");
+  const [currentTimeInSeconds, setCurrentTime] = useState(0);
+  const [durationInSeconds, setDuration] = useState(0);
 
-  const togglePlay = () => {
+  useEffect(() => {
     if (audioRef?.current) {
-      if (currentSongIndex === -1) {
+      if (!isSongPlaying && currentSongIndex !== -1) {
         audioRef.current.pause();
-      } else {
+      } else if (isSongPlaying) {
         audioRef.current.play();
       }
     }
+  }, [isSongPlaying]);
+
+  const togglePlay = () => {
+    setIsSongPlaying(!isSongPlaying);
+  };
+
+  // ... audio playback logic
+
+  const convertSecondsToMinSec = (seconds: number): string => {
+    const minutes: number = Math.floor(seconds / 60);
+    const remainingSeconds: number = seconds % 60;
+
+    const formattedMinutes: string =
+      minutes < 10 ? `0${minutes}` : `${minutes}`;
+    const formattedSeconds: string =
+      remainingSeconds < 10 ? `0${remainingSeconds}` : `${remainingSeconds}`;
+
+    return `${formattedMinutes}:${formattedSeconds}`;
+  };
+
+  const handleSeek = (newTime: number) => {
+    // Seek to the new time in your audio player
   };
 
   const updateProgressBar = () => {
     const audio = audioRef?.current;
-    const progressBar = progressBarRef.current;
-    if (audio && progressBar) {
+    if (audio) {
       const progress = (audio.currentTime / audio.duration) * 100;
-      progressBar.style.width = `${progress}%`;
+      //   progressBar.style.width = `${progress}%`;
 
+      // Get current time and duration as numbers
       const currentMinutes = Math.floor(audio.currentTime / 60);
       const currentSeconds = Math.floor(audio.currentTime % 60);
-      setCurrentTime(
-        `${currentMinutes}:${currentSeconds.toString().padStart(2, "0")}`
-      );
+      const currentTimeInSeconds = currentMinutes * 60 + currentSeconds;
 
       const durationMinutes = Math.floor(audio.duration / 60);
       const durationSeconds = Math.floor(audio.duration % 60);
-      setDuration(
-        `${durationMinutes}:${durationSeconds.toString().padStart(2, "0")}`
-      );
+      const durationInSeconds = durationMinutes * 60 + durationSeconds;
+
+      // Update state with numbers, but format as strings for display
+      setCurrentTime(currentTimeInSeconds);
+      setDuration(durationInSeconds);
     }
   };
 
-  const handleSeek = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (audioRef?.current && progressBarRef.current) {
-      const rect = progressBarRef.current.getBoundingClientRect();
-      const offsetX = event.clientX - rect.left;
-      const progressBarWidth = progressBarRef.current.clientWidth;
-      const seekPercentage = (offsetX / progressBarWidth) * 100;
-      const seekTime = (audioRef.current.duration * seekPercentage) / 100;
-      audioRef.current.currentTime = seekTime;
-    }
-  };
+  //   const handleSeek = (event: React.MouseEvent<HTMLDivElement>) => {
+  //     if (audioRef?.current && progressBarRef.current) {
+  //       const rect = progressBarRef.current.getBoundingClientRect();
+  //       const offsetX = event.clientX - rect.left;
+  //       const progressBarWidth = progressBarRef.current.clientWidth;
+  //       const seekPercentage = (offsetX / progressBarWidth) * 100;
+  //       const seekTime = (audioRef.current.duration * seekPercentage) / 100;
+  //       audioRef.current.currentTime = seekTime;
+  //     }
+  //   };
 
   useEffect(() => {
     if (audioRef?.current) {
@@ -68,26 +98,26 @@ const StickyBar: React.FC<{
 
   const [hoverTime, setHoverTime] = useState("0:00");
 
-  const handleHover = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (
-      audioRef?.current &&
-      progressBarRef.current &&
-      currentSongIndex !== -1
-    ) {
-      const rect = progressBarRef.current.getBoundingClientRect();
-      const offsetX = event.clientX - rect.left;
-      const progressBarWidth = progressBarRef.current.clientWidth;
-      const hoverPercentage = (offsetX / progressBarWidth) * 100;
-      const hoverTimeInSeconds =
-        (audioRef.current.duration * hoverPercentage) / 100;
+  //   const handleHover = (event: React.MouseEvent<HTMLDivElement>) => {
+  //     if (
+  //       audioRef?.current &&
+  //       progressBarRef.current &&
+  //       currentSongIndex !== -1
+  //     ) {
+  //       const rect = progressBarRef.current.getBoundingClientRect();
+  //       const offsetX = event.clientX - rect.left;
+  //       const progressBarWidth = progressBarRef.current.clientWidth;
+  //       const hoverPercentage = (offsetX / progressBarWidth) * 100;
+  //       const hoverTimeInSeconds =
+  //         (audioRef.current.duration * hoverPercentage) / 100;
 
-      const hoverMinutes = Math.floor(hoverTimeInSeconds / 60);
-      const hoverSeconds = Math.floor(hoverTimeInSeconds % 60);
-      setHoverTime(
-        `${hoverMinutes}:${hoverSeconds.toString().padStart(2, "0")}`
-      );
-    }
-  };
+  //       const hoverMinutes = Math.floor(hoverTimeInSeconds / 60);
+  //       const hoverSeconds = Math.floor(hoverTimeInSeconds % 60);
+  //       setHoverTime(
+  //         `${hoverMinutes}:${hoverSeconds.toString().padStart(2, "0")}`
+  //       );
+  //     }
+  //   };
 
   const handleHoverLeave = () => {
     setHoverTime("0:00");
@@ -95,7 +125,13 @@ const StickyBar: React.FC<{
 
   return (
     <div className={styles.stickyBar}>
-      <div
+      <ProgressBar
+        currentTime={currentTimeInSeconds}
+        duration={durationInSeconds}
+        onSeek={handleSeek}
+      />
+
+      {/* <div
         className={styles.progressBar}
         onMouseMove={handleHover}
         onMouseLeave={handleHoverLeave}
@@ -108,7 +144,7 @@ const StickyBar: React.FC<{
             <span>{hoverTime}</span>
           </div>
         )}
-      </div>
+      </div> */}
 
       <div className={styles.stickyBarBottomSection}>
         <div className={styles.songInfot}>
@@ -128,7 +164,7 @@ const StickyBar: React.FC<{
           )}
         </div>
 
-        {currentSongIndex === -1 ? (
+        {!isSongPlaying ? (
           <FaPlay className={styles.playIcon} onClick={togglePlay} />
         ) : (
           <FaPause className={styles.playIcon} onClick={togglePlay} />
@@ -142,7 +178,8 @@ const StickyBar: React.FC<{
           ></audio>
 
           <div className={styles.timeDisplay}>
-            <span>{currentTime}</span> / <span>{duration}</span>
+            <span>{convertSecondsToMinSec(currentTimeInSeconds)}</span> /{" "}
+            <span>{convertSecondsToMinSec(durationInSeconds)}</span>
           </div>
         </div>
       </div>
