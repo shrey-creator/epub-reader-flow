@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 import { BiBell } from "react-icons/bi";
-import SideMenu from "./SideMenu";
-import { AudioPlayerContext } from "./audio-player-context";
+import SideMenu from "../SideMenu";
 
 interface SongDetailView {
   songName: string;
@@ -22,8 +21,6 @@ const SongDetail: React.FC<SongDetailView> = ({
   handlePlayClick,
   currentSongIndex,
 }) => {
-  // const [isPlaying, setPlaying] = useState(false); // State to control play/pause
-
   return (
     <div className="song-row">
       <button
@@ -45,8 +42,6 @@ const SongDetail: React.FC<SongDetailView> = ({
       )}
       <div className="options1">
         <SideMenu />
-        {/* <button className="options-button">...</button> */}
-        {/* Add UI for options menu */}
       </div>
     </div>
   );

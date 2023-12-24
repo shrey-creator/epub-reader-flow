@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import { BiBell } from "react-icons/bi"; // Import the BiBell icon
 import styles from "./MusicPage.module.css"; // Import CSS module
-import SongDetail from "./song-item";
+import SongDetail from "./components/song-item";
 import { AudioPlayerContext } from "./audio-player-context";
 import StickyBar from "./sticky-bar";
+import HeaderComponent from "./components/HeaderPageComponent";
 
 const MusicPage = () => {
   const songs = [
@@ -83,7 +83,7 @@ const MusicPage = () => {
       // You can add logic here to stop playback or perform other actions
     }
   };
-  // };
+
   useEffect(() => {
     audioPlayer?.addEventListener("ended", handleSongEnded);
   }, [AudioPlayerContext]);
@@ -107,32 +107,20 @@ const MusicPage = () => {
     setCurrentSongIndex(songIndex);
   };
 
+  const handleTopComponentPlayClick = () => {
+    setCurrentSongIndex(0);
+    setIsSongPlaying(true);
+  };
+
   return (
     <div className={styles["music-page-container"]}>
       <div className={styles["music-page"]}>
         {/* Top Component */}
-        <div className={styles["top-component"]}>
-          <div className={styles["top-left"]}>
-            <img
-              src="https://imgs.search.brave.com/RYl7czB-pd5dsWx2F8SoIICRTBu9lUFN5ZIVusCzU_0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9zaGl2/amlwaWNzLmNvbS93/cC1jb250ZW50L3Vw/bG9hZHMvMjAyMy8w/Ni9CcmFobWEtS3Vt/YXJpcy1JbWFnZXMt/RnJlZS1Eb3dubG9h/ZC0yMS1TZXB0ZW1i/ZXItMjAyMy5qcGc"
-              alt="Song Cover"
-              className={styles["song-cover"]}
-            />
-            <div className="top-side-component">
-              <div className={styles["title"]}>Title of the Song</div>
-              <button
-                className={styles["play-button"]}
-                onClick={() => {
-                  setCurrentSongIndex(0);
-                  setIsSongPlaying(true);
-                }}
-              >
-                Play
-              </button>
-            </div>
-          </div>
-        </div>
-
+        <HeaderComponent
+          handlePlayClick={handleTopComponentPlayClick}
+          titleOfSong={"Title Of Song"}
+          imageUrl={""}
+        />
         {/* List of Songs */}
         <div className={styles["song-list"]}>
           {songs.map((song, index) => {

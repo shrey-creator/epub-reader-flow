@@ -1,0 +1,37 @@
+/* Top Component */
+.top-component {
+  margin-bottom: 20px;
+}
+
+.top-left {
+  display: flex;
+  align-items: center;
+}
+
+.song-cover {
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+  margin-right: 20px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.play-button {
+  margin-top: 10px;
+  padding: 6px 30px;
+  font-size: 18px;
+  border: none;
+  border-radius: 50px;
+  background-color: #3498db;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.play-button:hover {
+  background-color: #2980b9;
+}
