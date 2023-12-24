@@ -49,10 +49,6 @@ const StickyBar: React.FC<{
     return `${formattedMinutes}:${formattedSeconds}`;
   };
 
-  const handleSeek = (newTime: number) => {
-    // Seek to the new time in your audio player
-  };
-
   const updateProgressBar = () => {
     const audio = audioRef?.current;
     if (audio) {
@@ -74,16 +70,11 @@ const StickyBar: React.FC<{
     }
   };
 
-  //   const handleSeek = (event: React.MouseEvent<HTMLDivElement>) => {
-  //     if (audioRef?.current && progressBarRef.current) {
-  //       const rect = progressBarRef.current.getBoundingClientRect();
-  //       const offsetX = event.clientX - rect.left;
-  //       const progressBarWidth = progressBarRef.current.clientWidth;
-  //       const seekPercentage = (offsetX / progressBarWidth) * 100;
-  //       const seekTime = (audioRef.current.duration * seekPercentage) / 100;
-  //       audioRef.current.currentTime = seekTime;
-  //     }
-  //   };
+  const handleSeek = (clickTimeInSeconds: number) => {
+    if (audioRef?.current) {
+      audioRef.current.currentTime = clickTimeInSeconds;
+    }
+  };
 
   useEffect(() => {
     if (audioRef?.current) {
@@ -130,21 +121,6 @@ const StickyBar: React.FC<{
         duration={durationInSeconds}
         onSeek={handleSeek}
       />
-
-      {/* <div
-        className={styles.progressBar}
-        onMouseMove={handleHover}
-        onMouseLeave={handleHoverLeave}
-        onClick={handleSeek}
-        ref={progressBarRef}
-      >
-        <div className={styles.progress}></div>
-        {hoverTime !== "0:00" && (
-          <div className={styles.hoverTime}>
-            <span>{hoverTime}</span>
-          </div>
-        )}
-      </div> */}
 
       <div className={styles.stickyBarBottomSection}>
         <div className={styles.songInfot}>
