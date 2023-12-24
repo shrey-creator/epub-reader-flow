@@ -3,6 +3,7 @@ import { BiBell } from "react-icons/bi"; // Import the BiBell icon
 import styles from "./MusicPage.module.css"; // Import CSS module
 import SongDetail from "./song-item";
 import { AudioPlayerContext } from "./audio-player-context";
+import StickyBar from "./sticky-bar";
 
 const MusicPage = () => {
   const songs = [
@@ -12,6 +13,8 @@ const MusicPage = () => {
       singer: "Singer 1",
       isRingtoneAvailable: true,
       songUrl: "tes.mp3",
+      imgUrl:
+        "https://imgs.search.brave.com/RYl7czB-pd5dsWx2F8SoIICRTBu9lUFN5ZIVusCzU_0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9zaGl2/amlwaWNzLmNvbS93/cC1jb250ZW50L3Vw/bG9hZHMvMjAyMy8w/Ni9CcmFobWEtS3Vt/YXJpcy1JbWFnZXMt/RnJlZS1Eb3dubG9h/ZC0yMS1TZXB0ZW1i/ZXItMjAyMy5qcGc",
     },
     {
       id: 2,
@@ -19,6 +22,8 @@ const MusicPage = () => {
       singer: "Singer 2",
       isRingtoneAvailable: false,
       songUrl: "bahara_part2.mp3",
+      imgUrl:
+        "https://imgs.search.brave.com/sRxpeEVsuEkxR1OBfSUVlPwsbeU1vjm9jqCCIVEDIiA/rs:fit:500:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvZmVhdHVy/ZWQvc2hpdi1iYWJh/LWk2cDN6cTU5dHBu/Y2ZhYmouanBn",
     },
     {
       id: 3,
@@ -26,6 +31,8 @@ const MusicPage = () => {
       singer: "Singer 1",
       isRingtoneAvailable: true,
       songUrl: "test2.mp3",
+      imgUrl:
+        "https://imgs.search.brave.com/OYmf3w94VZG5RxgGpFKp0WU6MqPM4Em9jrrFyVv_fm8/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzVlL2Ez/LzU5LzVlYTM1OWY0/Y2Y1YmU4MjI1MThm/ZWZkY2IzMDRiOTNm/LmpwZw",
     },
     {
       id: 4,
@@ -33,6 +40,8 @@ const MusicPage = () => {
       singer: "Singer 2",
       isRingtoneAvailable: false,
       songUrl: "test.mp3",
+      imgUrl:
+        "https://imgs.search.brave.com/dgmzsdLt86OYDBqY_42KU9POxOJHV8fJ_13KSxy40P8/rs:fit:500:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDY2NjMy/NjIuanBn",
     },
     {
       id: 5,
@@ -61,7 +70,7 @@ const MusicPage = () => {
     // Add more songs as needed
   ];
 
-  const audioPlayer = useContext(AudioPlayerContext);
+  const audioPlayer = useContext(AudioPlayerContext)?.current;
   const [currentSongIndex, setCurrentSongIndex] = useState(-1);
   const handleSongEnded = () => {
     // Check if there are more songs in the list
@@ -74,19 +83,18 @@ const MusicPage = () => {
     }
   };
   // };
-
-  audioPlayer.addEventListener("ended", handleSongEnded);
+  useEffect(() => {
+    audioPlayer?.addEventListener("ended", handleSongEnded);
+  }, [AudioPlayerContext]);
 
   useEffect(() => {
-    console.log("audioPlayer", audioPlayer.currentSrc);
-
     if (currentSongIndex >= 0) {
       const currentSongUrl = songs[currentSongIndex]?.songUrl as string;
-      if (audioPlayer.currentSrc !== currentSongUrl)
+      if (audioPlayer?.currentSrc !== currentSongUrl && audioPlayer)
         audioPlayer.src = currentSongUrl;
-      audioPlayer.play();
+      audioPlayer?.play();
     } else {
-      audioPlayer.pause();
+      audioPlayer?.pause();
     }
   }, [currentSongIndex]);
 
@@ -143,6 +151,11 @@ const MusicPage = () => {
           );
         })}
       </div>
+      <StickyBar
+        handleSongEnded={handleSongEnded}
+        currentSongIndex={currentSongIndex}
+        songsArray={songs}
+      />
     </div>
   );
 };
