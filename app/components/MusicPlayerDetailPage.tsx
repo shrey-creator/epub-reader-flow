@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import styles from "./MusicPage.module.css"; // Import CSS module
-import SongDetail from "./components/song-item";
-import { AudioPlayerContext } from "./audio-player-context";
+import SongDetail from "./song-item";
+import { AudioPlayerContext } from "../audio-player-context";
 import StickyBar from "./sticky-bar";
-import HeaderComponent from "./components/HeaderPageComponent";
+import HeaderComponent from "./HeaderPageComponent";
 
 const MusicPage = () => {
   const songs = [
@@ -97,7 +97,7 @@ const MusicPage = () => {
     }
   }, [currentSongIndex]);
 
-  const handlePlayClick = (songIndex: number) => {
+  const handleSongListViewPlayClick = (songIndex: number) => {
     if (songIndex === currentSongIndex) {
       if (isSongPlaying) setIsSongPlaying(false);
       else setIsSongPlaying(true);
@@ -125,15 +125,14 @@ const MusicPage = () => {
         <div className={styles["song-list"]}>
           {songs.map((song, index) => {
             return (
-              <div>
+              <div key={index}>
                 <SongDetail
                   songName={song.name}
                   sungBy={song.singer}
                   ringToneUrl={"test.mp3"}
-                  key={index}
                   songindex={index}
                   date={""}
-                  handlePlayClick={handlePlayClick}
+                  handlePlayClick={handleSongListViewPlayClick}
                   currentSongIndex={currentSongIndex}
                 />
               </div>

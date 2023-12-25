@@ -1,0 +1,51 @@
+.songRow {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+  justify-content: space-between;
+}
+
+.songRow:hover {
+  background-color: white;
+}
+
+.leftComponent {
+  display: flex;
+}
+
+.rightComponent {
+  display: flex;
+  align-items: center;
+}
+
+.playButtonSmall {
+  padding: 4px 8px; /* Adjust padding */
+  font-size: 12px; /* Adjust font size */
+  border: none;
+  border-radius: 20px; /* Make it more round */
+  background-color: #3498db;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 10px; /* Leave some gap between title and play button */
+}
+
+.songDetails {
+  flex-grow: 1;
+}
+
+.songName {
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.singer {
+  color: #777;
+}
+
+.ringtoneIcon {
+  margin-right: 10px;
+}

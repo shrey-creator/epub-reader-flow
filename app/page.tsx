@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import EpubReader from "./epub-reader";
-import MusicPage from "./epub-reader";
+import MusicPage from "./components/MusicPlayerDetailPage";
 import { AudioPlayerContext } from "./audio-player-context";
 
 export default function Home() {

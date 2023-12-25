@@ -6,6 +6,7 @@
   padding: 20px;
   height: calc(100vh - 50px); /* Adjust height for the sticky bar */
   overflow-y: auto; /* Enable vertical scrolling */
+  background-color: #f5f5f5;
 }
 
 /* Top Component */

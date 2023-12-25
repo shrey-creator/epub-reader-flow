@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { BiDotsHorizontalRounded } from "react-icons/bi"; // Assuming you're using React Icons
 
+import styles from "./SideMenu.module.css";
+
 const SideMenu = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -15,17 +17,20 @@ const SideMenu = () => {
   };
 
   return (
-    <div className={"side-menu"}>
-      <div className={"menu-icon"} onClick={toggleMenu}>
+    <div className={styles.sideMenu}>
+      <div className={styles.menuIcon} onClick={toggleMenu}>
         <BiDotsHorizontalRounded />
       </div>
       {menuOpen && (
-        <div className="options">
-          <div className="option" onClick={() => handleOptionClick("Share")}>
+        <div className={styles.options}>
+          <div
+            className={styles.option}
+            onClick={() => handleOptionClick("Share")}
+          >
             Share
           </div>
           <div
-            className="option"
+            className={styles.option}
             onClick={() => handleOptionClick("Add to Playlist")}
           >
             Add to Playlist

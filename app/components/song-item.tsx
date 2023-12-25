@@ -1,6 +1,7 @@
 import React from "react";
 import { BiBell } from "react-icons/bi";
-import SideMenu from "../SideMenu";
+import SideMenu from "./SideMenu";
+import styles from "./SongItem.module.css";
 
 interface SongDetailView {
   songName: string;
@@ -22,26 +23,30 @@ const SongDetail: React.FC<SongDetailView> = ({
   currentSongIndex,
 }) => {
   return (
-    <div className="song-row">
-      <button
-        className="play-button-small"
-        onClick={() => {
-          handlePlayClick(songindex);
-        }}
-      >
-        {songindex === currentSongIndex ? "▐▐ " : "▶"}
-      </button>
-      <div className="song-details">
-        <div className="song-name">{songName}</div>
-        <div className="singer"> {sungBy}</div>
-      </div>
-      {ringToneUrl && (
-        <button>
-          <BiBell className="ringtone-icon" />
+    <div className={styles.songRow}>
+      <div className={styles.leftComponent}>
+        <button
+          className={styles.playButtonSmall}
+          onClick={() => {
+            handlePlayClick(songindex);
+          }}
+        >
+          {songindex === currentSongIndex ? "▐▐ " : "▶"}
         </button>
-      )}
-      <div className="options1">
-        <SideMenu />
+        <div className={styles.songDetails}>
+          <div className={styles.songName}>{songName}</div>
+        </div>
+      </div>
+
+      <div className={styles.middleComponent}>
+        <div className={styles.singer}> {sungBy}</div>
+      </div>
+
+      <div className={styles.rightComponent}>
+        {ringToneUrl && <BiBell className={styles.ringtoneIcon} />}
+        <div>
+          <SideMenu />
+        </div>
       </div>
     </div>
   );

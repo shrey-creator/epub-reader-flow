@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
 import styles from "./StickyBar.module.css"; // Import CSS module for styling
-import { AudioPlayerContext } from "./audio-player-context";
-import { FaPause, FaPlay } from "react-icons/fa"; // Import Play Icon from react-icons/fa
+import { AudioPlayerContext } from "../audio-player-context";
+import { FaPause, FaPlay, FaFastForward, FaFastBackward } from "react-icons/fa"; // Import Play Icon from react-icons/fa
 import ProgressBar from "./ProgressBar";
 
 const StickyBar: React.FC<{
@@ -38,6 +38,7 @@ const StickyBar: React.FC<{
   // ... audio playback logic
 
   const convertSecondsToMinSec = (seconds: number): string => {
+    if (!seconds) return `00:00`;
     const minutes: number = Math.floor(seconds / 60);
     const remainingSeconds: number = seconds % 60;
 
@@ -87,7 +88,17 @@ const StickyBar: React.FC<{
     }
   }, []);
 
-  const [hoverTime, setHoverTime] = useState("0:00");
+  const handleFastForward = () => {
+    let forwaredTime = currentTimeInSeconds + 10;
+    if (forwaredTime > durationInSeconds) forwaredTime = durationInSeconds;
+    if (audioRef?.current) audioRef.current.currentTime = forwaredTime;
+  };
+
+  const handleBackForward = () => {
+    let backWardedTime = currentTimeInSeconds - 10;
+    if (backWardedTime < 0) backWardedTime = 0;
+    if (audioRef?.current) audioRef.current.currentTime = backWardedTime;
+  };
 
   return (
     <div className={styles.stickyBar}>
@@ -114,13 +125,23 @@ const StickyBar: React.FC<{
             </div>
           )}
         </div>
-        <div>
+
+        <div className={styles.stickyBarMiddleSection}>
+          <FaFastBackward
+            className={styles.playIcon}
+            onClick={handleBackForward}
+          />
           {!isSongPlaying ? (
             <FaPlay className={styles.playIcon} onClick={togglePlay} />
           ) : (
             <FaPause className={styles.playIcon} onClick={togglePlay} />
           )}
+          <FaFastForward
+            className={styles.playIcon}
+            onClick={handleFastForward}
+          />
         </div>
+
         <div>
           <audio
             ref={audioRef}
