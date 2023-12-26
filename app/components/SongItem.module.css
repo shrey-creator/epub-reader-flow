@@ -14,6 +14,7 @@
 
 .leftComponent {
   display: flex;
+  align-items: center;
 }
 
 .rightComponent {
@@ -22,15 +23,10 @@
 }
 
 .playButtonSmall {
-  padding: 4px 8px; /* Adjust padding */
-  font-size: 12px; /* Adjust font size */
+  /* Adjust font size */
   border: none;
-  border-radius: 20px; /* Make it more round */
-  background-color: #3498db;
-  color: #fff;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-bottom: 10px; /* Leave some gap between title and play button */
+  margin-right: 15px;
 }
 
 .songDetails {

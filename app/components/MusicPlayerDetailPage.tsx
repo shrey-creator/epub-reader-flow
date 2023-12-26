@@ -21,33 +21,34 @@ const MusicPage = () => {
       name: "Song 2",
       singer: "Singer 2",
       isRingtoneAvailable: false,
-      songUrl: "bahara_part2.mp3",
+      songUrl: "aaye.mp3",
       imgUrl:
         "https://imgs.search.brave.com/sRxpeEVsuEkxR1OBfSUVlPwsbeU1vjm9jqCCIVEDIiA/rs:fit:500:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvZmVhdHVy/ZWQvc2hpdi1iYWJh/LWk2cDN6cTU5dHBu/Y2ZhYmouanBn",
     },
     {
       id: 3,
-      name: "Song 1",
+      name: "Song 3",
       singer: "Singer 1",
       isRingtoneAvailable: true,
-      songUrl: "test2.mp3",
+      songUrl: "awaz.mp3",
       imgUrl:
         "https://imgs.search.brave.com/OYmf3w94VZG5RxgGpFKp0WU6MqPM4Em9jrrFyVv_fm8/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzVlL2Ez/LzU5LzVlYTM1OWY0/Y2Y1YmU4MjI1MThm/ZWZkY2IzMDRiOTNm/LmpwZw",
     },
     {
       id: 4,
-      name: "Song 2",
+      name: "Song 4",
       singer: "Singer 2",
       isRingtoneAvailable: false,
-      songUrl: "test.mp3",
+      songUrl: "baba.mp3",
       imgUrl:
         "https://imgs.search.brave.com/dgmzsdLt86OYDBqY_42KU9POxOJHV8fJ_13KSxy40P8/rs:fit:500:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDY2NjMy/NjIuanBn",
     },
     {
       id: 5,
-      name: "Song 1",
+      name: "Song 5",
       singer: "Singer 1",
       isRingtoneAvailable: true,
+      songUrl: "satguru.mp3",
     },
     {
       id: 6,
@@ -64,6 +65,12 @@ const MusicPage = () => {
     {
       id: 8,
       name: "Song 2",
+      singer: "Singer 2",
+      isRingtoneAvailable: false,
+    },
+    {
+      id: 8,
+      name: "Song 100",
       singer: "Singer 2",
       isRingtoneAvailable: false,
     },
