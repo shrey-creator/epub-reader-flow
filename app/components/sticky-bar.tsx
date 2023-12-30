@@ -100,6 +100,46 @@ const StickyBar: React.FC<{
     if (audioRef?.current) audioRef.current.currentTime = backWardedTime;
   };
 
+  useEffect(() => {
+    if ("mediaSession" in navigator) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: songsArray[currentSongIndex]?.name || "Unknown Title",
+        artist: "Your Artist Name", // Update with appropriate artist info
+        album: "Your Album Name", // Update with appropriate album info
+        // artwork: [
+        //   {
+        //     src: songsArray[currentSongIndex]?.imgUrl,
+        //     sizes: "96x96",
+        //     type: "image/png",
+        //   },
+        //   // Add more artwork sizes if needed
+        // ],
+      });
+
+      navigator.mediaSession.setActionHandler("play", () => {
+        setIsSongPlaying(true);
+      });
+
+      navigator.mediaSession.setActionHandler("pause", () => {
+        setIsSongPlaying(false);
+      });
+
+      navigator.mediaSession.setActionHandler("previoustrack", () => {
+        handleBackForward();
+      });
+
+      navigator.mediaSession.setActionHandler("nexttrack", () => {
+        handleFastForward();
+      });
+    }
+  }, [
+    currentSongIndex,
+    handleBackForward,
+    handleFastForward,
+    setIsSongPlaying,
+    songsArray,
+  ]);
+
   return (
     <div className={styles.stickyBar}>
       <ProgressBar
