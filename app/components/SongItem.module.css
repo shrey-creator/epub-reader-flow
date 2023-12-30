@@ -57,4 +57,10 @@
   justify-self: end;
 } /* */
 
+@media screen and (max-width: 768px) {
+  .middleComponent {
+    display: none; /* Hide the rows on smaller screens */
+  }
+}
+
 /* Add or modify styles as needed */

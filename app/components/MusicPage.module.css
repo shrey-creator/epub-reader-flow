@@ -55,16 +55,6 @@
   background-color: #2980b9;
 }
 
-/* Song List */
-.song-row {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 5px;
-  background-color: #f5f5f5;
-}
-
 .song-details {
   flex-grow: 1;
 }
@@ -111,4 +101,15 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin-bottom: 10px; /* Leave some gap between title and play button */
+}
+
+@media screen and (max-width: 768px) {
+  .song-list {
+    display: grid;
+    grid-template-columns: auto auto; /* Adjust grid columns as needed */
+    gap: 25px;
+    justify-items: start;
+    align-items: center;
+    font-size: 20px; /* Increase font size for better readability */
+  }
 }
