@@ -26,6 +26,14 @@
   margin-right: 20px;
 }
 
+.song-list {
+  display: grid;
+  grid-template-columns: auto auto auto; /* Adjust grid columns as needed */
+  gap: 30px;
+  justify-items: start;
+  align-items: center;
+}
+
 .title {
   font-size: 24px;
   font-weight: bold;

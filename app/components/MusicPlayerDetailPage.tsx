@@ -9,7 +9,7 @@ const MusicPage = () => {
   const songs = [
     {
       id: 1,
-      name: "Song 1",
+      name: "Song ",
       singer: "Singer 1",
       isRingtoneAvailable: true,
       songUrl: "tes.mp3",
@@ -132,17 +132,16 @@ const MusicPage = () => {
         <div className={styles["song-list"]}>
           {songs.map((song, index) => {
             return (
-              <div key={index}>
-                <SongDetail
-                  songName={song.name}
-                  sungBy={song.singer}
-                  ringToneUrl={"test.mp3"}
-                  songindex={index}
-                  date={""}
-                  handlePlayClick={handleSongListViewPlayClick}
-                  currentSongIndex={currentSongIndex}
-                />
-              </div>
+              <SongDetail
+                key={index}
+                songName={song.name}
+                sungBy={song.singer}
+                ringToneUrl={"test.mp3"}
+                songindex={index}
+                date={""}
+                handlePlayClick={handleSongListViewPlayClick}
+                currentSongIndex={currentSongIndex}
+              />
             );
           })}
         </div>

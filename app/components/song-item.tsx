@@ -24,7 +24,7 @@ const SongDetail: React.FC<SongDetailView> = ({
   currentSongIndex,
 }) => {
   return (
-    <div className={styles.songRow}>
+    <>
       <div className={styles.leftComponent}>
         {songindex === currentSongIndex ? (
           <FaMusic className={styles.playButtonSmall} />
@@ -50,7 +50,7 @@ const SongDetail: React.FC<SongDetailView> = ({
           <SideMenu />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,4 +1,4 @@
-.songRow {
+/* .songRow {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
@@ -6,21 +6,21 @@
   border-radius: 5px;
   background-color: #f5f5f5;
   justify-content: space-between;
-}
+} */
 
 .songRow:hover {
   background-color: white;
 }
 
-.leftComponent {
+/* .leftComponent {
   display: flex;
   align-items: center;
-}
+} */
 
-.rightComponent {
+/* .rightComponent {
   display: flex;
   align-items: center;
-}
+} */
 
 .playButtonSmall {
   /* Adjust font size */
@@ -45,3 +45,16 @@
 .ringtoneIcon {
   margin-right: 10px;
 }
+
+.leftComponent {
+  display: flex;
+  align-items: center;
+}
+
+.rightComponent {
+  display: flex;
+  align-items: center;
+  justify-self: end;
+} /* */
+
+/* Add or modify styles as needed */
